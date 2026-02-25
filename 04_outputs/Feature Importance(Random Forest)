@@ -1,0 +1,16 @@
+# Model Comparison
+results = pd.DataFrame({
+    "Model": ["Linear Regression", "Random Forest"],
+    "MAE": [mae_lr, mae_rfc],
+    "RMSE": [rmse_lr, rmse_rfc]})
+
+results
+
+# Feature Importance(Random Forest)
+feature_importance = pd.Series(rfc.feature_importances_,index=X.columns).sort_values(ascending=False)
+feature_importance.head(10)
+
+# Plot Feature Importance
+feature_importance.head(10).plot(kind='bar', figsize=(10,4))
+plt.title("Top 10 Feature Importances")
+plt.show()
