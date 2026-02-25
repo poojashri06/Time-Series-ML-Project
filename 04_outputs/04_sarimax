@@ -1,0 +1,32 @@
+# To Find Auto ARIMA
+from pmdarima import auto_arima
+arima = auto_arima(Y_train,seasonal=True,m=7)
+print(arima)
+# Build SARIMAX Model
+model = SARIMAX(
+    Y_train,
+    exog=exog_train,
+    order=(0, 1, 1),
+    seasonal_order=(0, 0, 2, 7),
+    enforce_stationarity=False,
+    enforce_invertibility=False)
+# Train the Model
+sarimax_result = model.fit(disp=False)
+sarimax_result.summary()
+
+# Forecast Using External Factors
+Y_pred = sarimax_result.predict(start=Y_test.index[0],end=Y_test.index[-1],exog=exog_test)
+
+# Evaluate Model Performance
+mae = mean_absolute_error(Y_test, Y_pred)
+rmse = np.sqrt(mean_squared_error(Y_test, Y_pred))
+
+print("SARIMAX MAE:", mae)
+print("SARIMAX RMSE:", rmse)
+
+plt.figure(figsize=(12,5))
+plt.plot(Y_test.index, Y_test, label='Actual')
+plt.plot(Y_test.index, Y_pred, label='Predicted')
+plt.title("SARIMAX Forecast with External Factors")
+plt.legend()
+plt.show()
