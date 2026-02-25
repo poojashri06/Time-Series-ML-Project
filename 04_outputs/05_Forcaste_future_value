@@ -1,0 +1,8 @@
+# Forecast Future Values 
+future_steps = 30
+future_exog = exog_test.iloc[:future_steps]
+future_forecast = sarimax_result.forecast(
+    steps=future_steps,
+    exog=future_exog)
+
+future_forecast
