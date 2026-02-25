@@ -1,1 +1,17 @@
+# Base Line Model - Linear Regression
+lr=LinearRegression()
+lr.fit(X_train,Y_train)
+Y_pred_lr=lr.predict(X_test)
+# Evaluate Linear Regression 
+mae_lr = mean_absolute_error(Y_test, Y_pred_lr)
+rmse_lr = np.sqrt(mean_squared_error(Y_test, Y_pred_lr))
 
+print("Linear Regression MAE:", mae_lr)
+print("Linear Regression RMSE:", rmse_lr)
+# Plot Predictions-Linear Regression 
+plt.figure(figsize=(12,5))
+plt.plot(Y_test.index, Y_test, label="Actual")
+plt.plot(Y_test.index, Y_pred_lr, label="Predicted")
+plt.title("Linear Regression: Actual vs Predicted")
+plt.legend()
+plt.show()
