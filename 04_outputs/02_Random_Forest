@@ -1,0 +1,17 @@
+# Advanced Model - Random Forest Regressor
+rfc = RandomForestRegressor(n_estimators=100,max_depth=10,random_state=42)
+rfc.fit(X_train, Y_train)
+Y_pred_rfc = rfc.predict(X_test)
+# Evaluate Random Forest
+mae_rfc = mean_absolute_error(Y_test, Y_pred_rfc)
+rmse_rfc = np.sqrt(mean_squared_error(Y_test, Y_pred_rfc))
+
+print("Random Forest MAE:", mae_rfc)
+print("Random Forest RMSE:", rmse_rfc)
+# Plot Predictions - Random Forest
+plt.figure(figsize=(12,5))
+plt.plot(Y_test.index, Y_test, label="Actual")
+plt.plot(Y_test.index, Y_pred_rfc, label="Predicted")
+plt.title("Random Forest: Actual vs Predicted")
+plt.legend()
+plt.show()
